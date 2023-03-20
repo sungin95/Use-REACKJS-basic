@@ -75,7 +75,7 @@
               id="km"
               type="number"
               disabled={invert}
-              value={invert ? Math.round(disctance / 2) : disctance}
+              value={invert ? Math.round(disctance / 1.609) : disctance}
               placeholder="km"
               onChange={onChange}
             />
@@ -86,7 +86,7 @@
               id="miles"
               type="number"
               disabled={!invert}
-              value={invert ? disctance : disctance * 2}
+              value={invert ? disctance : disctance * 1.609}
               placeholder="miles"
               onChange={onChange}
             />
