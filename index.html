@@ -11,22 +11,19 @@
   <script type="text/babel">
     const root = document.getElementById("root");
     let counter = 0;
-    // 변수의 값을 바꾸었고 이것을 적용 해 줄려면 리렌더링을 해야 한다. innerText=""이랑 다르다.
     function countUp() {
-      counter = counter + 1;
-      render();
+      // code
     }
-    function render() {
-      ReactDOM.render(<Container />, root);
-    }
-    function Container() {
+    function App() {
+      const [counter, modefier] = React.useState(0);
+      console.log(data);
       return (
         <div>
-          <h3>Total clicks: {counter}</h3>
-          <button onClick={countUp}>Click me</button>
+          <h3>Total clicks: 0</h3>
+          <button>Click me</button>
         </div>
       );
     }
-    render();
+    ReactDOM.render(<App />, root);
   </script>
 </html>
