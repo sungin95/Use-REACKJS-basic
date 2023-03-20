@@ -4,22 +4,31 @@
     <div id="root"></div>
   </body>
   <!--리액트 사용시 아래 두개 필요-->
-  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
-  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.js"></script>
   <!--바벨-->
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
     const root = document.getElementById("root");
     function App() {
-      const [counter, setCounter] = React.useState(0);
-      const onClick = () => {
-        // 예상치 못한 업데이트가 있어도 현재 값을 변수로 받기 때문에 정상 작동한다.
-        setCounter((current) => current + 1);
+      const [minutes, setMinutes] = React.useState();
+      const onChange = (event) => {
+        setMinutes(event.target.value);
       };
       return (
         <div>
-          <h3>Total clicks: {counter}</h3>
-          <button onClick={onClick}>Click me</button>
+          <h1 className="hi">Super converter</h1>
+          <label htmlFor="minutes">Minutes</label>
+          <input
+            value={minutes}
+            id="minutes"
+            placeholder="Minutes"
+            type="number"
+            onChange={onChange}
+          />
+          <h4>You want to convert {minutes}</h4>
+          <label htmlFor="Hours">Minutes</label>
+          <input id="Hours" placeholder="Hours" type="number" />
         </div>
       );
     }
