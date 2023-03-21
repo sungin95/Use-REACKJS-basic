@@ -9,28 +9,37 @@
   <!--바벨-->
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
-    function Btn({ text, big }) {
-      return (
-        <button
-          style={{
-            backgroundColor: "tomato",
-            color: "white",
-            padding: "10px 20px",
-            border: 0,
-            borderRadius: 10,
-            fontSize: big ? 18 : 16,
-          }}
-        >
-          {text}
-        </button>
-      );
-    }
-
-    function App() {
+    function Btn({ text, onClick }) {
+      console.log(text, "was rendered");
       return (
         <div>
-          <Btn text="Save Changes" big={true} />
-          <Btn text="Continue" big={false} />
+          <button
+            onClick={onClick}
+            style={{
+              backgroundColor: "tomato",
+              color: "white",
+              padding: "10px 20px",
+              border: 0,
+              borderRadius: 10,
+              fontSize: 16,
+            }}
+          >
+            {text}
+          </button>
+        </div>
+      );
+    }
+    const MemorizedBtn = React.memo(Btn);
+    function App() {
+      // 부모의 상태를 바꾸는 함수
+      // 그리고 그걸 자식이 실행시킨다.
+      // 그런데 변하는 것만 재실행하고 싶다.
+      const [value, setValue] = React.useState("Save Changess");
+      const changeValue = () => setValue("Revert Changes");
+      return (
+        <div>
+          <MemorizedBtn text={value} onClick={changeValue} />
+          <MemorizedBtn text="Continue" />
         </div>
       );
     }
