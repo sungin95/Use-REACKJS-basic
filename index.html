@@ -6,22 +6,22 @@
   <!--리액트 사용시 아래 두개 필요-->
   <script src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
   <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.js"></script>
+  <!--props type-->
+  <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
   <!--바벨-->
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
-    function Btn({ text, onClick }) {
-      console.log(text, "was rendered");
+    function Btn({ text, fontSize = 40 }) {
       return (
         <div>
           <button
-            onClick={onClick}
             style={{
               backgroundColor: "tomato",
               color: "white",
               padding: "10px 20px",
               border: 0,
               borderRadius: 10,
-              fontSize: 16,
+              fontSize,
             }}
           >
             {text}
@@ -29,17 +29,17 @@
         </div>
       );
     }
-    const MemorizedBtn = React.memo(Btn);
+    // protoType이란 다르다.
+    Btn.propTypes = {
+      text: PropTypes.string.isRequired,
+      fontSize: PropTypes.number,
+    };
+    // https://snupi.tistory.com/145 종류
     function App() {
-      // 부모의 상태를 바꾸는 함수
-      // 그리고 그걸 자식이 실행시킨다.
-      // 그런데 변하는 것만 재실행하고 싶다.
-      const [value, setValue] = React.useState("Save Changess");
-      const changeValue = () => setValue("Revert Changes");
       return (
         <div>
-          <MemorizedBtn text={value} onClick={changeValue} />
-          <MemorizedBtn text="Continue" />
+          <Btn text="Save Changess" fontSize={18} />
+          <Btn text="Continue" fontSize={18} />
         </div>
       );
     }
